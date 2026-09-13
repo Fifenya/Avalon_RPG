@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Elemental Skills | Avalon</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', 'Segoe UI', serif;
+            background: #0a0f1a;
+            color: #e8dcc8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a1a2e 50%, #0d1117 100%);
+        }
+
+        .bg-layer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(100, 70, 200, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(200, 100, 150, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .bg-layer::after {
+            content: '✦ ⚔️ 🛡️ 🔮 ✨ 🐉 ⚡ ❄️ 🔥 💧 🌿 🪨';
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 24px;
+            opacity: 0.05;
+            letter-spacing: 20px;
+            white-space: nowrap;
+            overflow-x: hidden;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 16px;
+            padding-bottom: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(30, 25, 55, 0.9), rgba(20, 15, 40, 0.95));
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(210, 180, 140, 0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .diploma-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .diploma-red {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: #ffd700;
+            box-shadow: 0 0 15px rgba(220,38,38,0.3);
+        }
+
+        .diploma-blue {
+            background: linear-gradient(135deg, #3b82f6, #1e3a5f);
+            color: #e0e0e0;
+        }
+
+        .points {
+            font-size: 44px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+            margin: 8px 0;
+        }
+
+        .points-label {
+            font-size: 12px;
+            color: #b8a88c;
+            letter-spacing: 2px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding: 4px 0;
+            scrollbar-width: thin;
+        }
+
+        .tab {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            background: rgba(25, 20, 45, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid rgba(210, 180, 140, 0.3);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #4a2f8d, #2a1a5e);
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(74,47,141,0.5);
+        }
+
+        .tree-container {
+            background: rgba(15, 12, 25, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
+            padding: 20px 12px;
+            border: 1px solid rgba(210, 180, 140, 0.2);
+        }
+
+        .skill-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .skill-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .skill-node {
+            background: rgba(10, 8, 20, 0.9);
+            border-radius: 20px;
+            padding: 14px;
+            width: 170px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid rgba(210, 180, 140, 0.3);
+        }
+
+        .skill-node.learned {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
+            box-shadow: 0 0 20px rgba(255,215,0,0.2);
+        }
+
+        .skill-node.available {
+            border-color: #22c55e;
+            animation: pulse 1.5s infinite;
+        }
+
+        .skill-node.locked {
+            border-color: #ef4444;
+            opacity: 0.7;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+        }
+
+        .skill-emoji {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .skill-desc {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .skill-cost {
+            font-size: 11px;
+            color: #f59e0b;
+        }
+
+        .connector {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(210, 180, 140, 0.4);
+            margin: -8px 0;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1528, #0f0c1a);
+            border-radius: 32px;
+            max-width: 320px;
+            width: 100%;
+            padding: 24px;
+            border: 1px solid rgba(210, 180, 140, 0.5);
+            position: relative;
+        }
+
+        .modal-emoji {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .modal-desc {
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(210, 180, 140, 0.2);
+        }
+
+        .requirement-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(210, 180, 140, 0.1);
+        }
+
+        .requirement-label {
+            font-size: 14px;
+        }
+
+        .requirement-value.met {
+            color: #22c55e;
+        }
+
+        .requirement-value.not-met {
+            color: #ef4444;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a2f8d, #2a1a5e);
+            color: #ffd700;
+        }
+
+        .btn-primary.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: #b8a88c;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            color: white;
+            background: none;
+            border: none;
+        }
+
+        .branch-info {
+            background: rgba(15, 12, 25, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
+            padding: 16px;
+            margin-top: 16px;
+            border: 1px solid rgba(210, 180, 140, 0.2);
+            text-align: center;
+        }
+
+        .branch-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .branch-progress {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .branch-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffb347);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .branch-message {
+            font-size: 13px;
+            color: #b8a88c;
+            margin-top: 8px;
+        }
+
+        .close-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(74, 47, 141, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(210, 180, 140, 0.3);
+            border-radius: 40px;
+            padding: 12px 24px;
+            color: #ffd700;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            .skill-node {
+                width: 145px;
+                padding: 10px;
+            }
+            .skill-emoji {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-layer"></div>
+    
+    <div id="app" class="container"></div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content" id="modalContent">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div id="modalInner"></div>
+        </div>
+    </div>
+
+    <div class="close-btn" onclick="closeApp()">✕ Закрыть</div>
+
+    <script>
+        // Инициализация Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.ready();
+        
+        function closeApp() {
+            tg.close();
+        }
+
+        // ========== ДЕМО-ДАННЫЕ (временные, для отображения) ==========
+        // В реальном боте данные будут приходить через tg.sendData()
+        const DEMO_DATA = {
+            diploma_type: 'red',
+            prestige_points: 7,
+            branches: [
+                {
+                    id: 'battle_mage',
+                    name: 'Боевой маг',
+                    emoji: '🔥',
+                    description: 'Увеличивает урон заклинаний и физических атак',
+                    max_level: 5,
+                    current_level: 2,
+                    is_unlocked: true,
+                    multiplier: 1.0,
+                    levels: [
+                        {
+                            level: 1,
+                            name: 'Искра магии',
+                            description: 'Магия начинает просыпаться в тебе',
+                            status: 'learned',
+                            cost: 1,
+                            effects: { power: 5, spell_damage: 5 },
+                            requirements: { level_required: 1, level_current: 15, level_met: true, branch_level_required: 0, branch_level_met: true }
+                        },
+                        {
+                            level: 2,
+                            name: 'Усиление заклинаний',
+                            description: 'Твои заклинания бьют сильнее',
+                            status: 'learned',
+                            cost: 2,
+                            effects: { spell_damage: 10, crit: 0.02 },
+                            requirements: { level_required: 5, level_current: 15, level_met: true, branch_level_required: 1, branch_level_met: true }
+                        },
+                        {
+                            level: 3,
+                            name: 'Магический резонанс',
+                            description: 'Магия и сила дополняют друг друга',
+                            status: 'available',
+                            cost: 2,
+                            effects: { power: 10, spell_damage: 15, mana_regen: 2 },
+                            requirements: { level_required: 10, level_current: 15, level_met: true, branch_level_required: 2, branch_level_met: true }
+                        },
+                        {
+                            level: 4,
+                            name: 'Элементальный всплеск',
+                            description: 'Твоя магия выходит на новый уровень',
+                            status: 'locked',
+                            cost: 3,
+                            effects: { spell_damage: 20, crit: 0.05 },
+                            requirements: { level_required: 15, level_current: 15, level_met: true, branch_level_required: 3, branch_level_met: false }
+                        },
+                        {
+                            level: 5,
+                            name: 'Архимаг',
+                            description: 'Ты достиг вершин боевой магии',
+                            status: 'locked',
+                            cost: 5,
+                            effects: { power: 25, spell_damage: 30, crit: 0.08, mana: 100 },
+                            requirements: { level_required: 20, level_current: 15, level_met: false, branch_level_required: 4, branch_level_met: false }
+                        }
+                    ]
+                },
+                {
+                    id: 'shadow_blade',
+                    name: 'Теневой клинок',
+                    emoji: '🗡️',
+                    description: 'Мастер скрытности и критических ударов',
+                    max_level: 5,
+                    current_level: 0,
+                    is_unlocked: false,
+                    multiplier: 1.0,
+                    levels: [
+                        {
+                            level: 1,
+                            name: 'Теневой шаг',
+                            description: 'Ты учишься двигаться бесшумно',
+                            status: 'locked',
+                            cost: 1,
+                            effects: { dodge: 0.03, agility: 5 },
+                            requirements: { level_required: 3, level_current: 15, level_met: true, branch_level_required: 0, branch_level_met: false }
+                        },
+                        {
+                            level: 2,
+                            name: 'Удар из тени',
+                            description: 'Первая атака наносит удвоенный урон',
+                            status: 'locked',
+                            cost: 2,
+                            effects: { crit: 0.05, first_strike: 2 },
+                            requirements: { level_required: 8, level_current: 15, level_met: true, branch_level_required: 1, branch_level_met: false }
+                        },
+                        {
+                            level: 3,
+                            name: 'Мастер крита',
+                            description: 'Твои криты сокрушительны',
+                            status: 'locked',
+                            cost: 2,
+                            effects: { crit: 0.08, crit_damage: 1.5 },
+                            requirements: { level_required: 12, level_current: 15, level_met: true, branch_level_required: 2, branch_level_met: false }
+                        },
+                        {
+                            level: 4,
+                            name: 'Неуловимость',
+                            description: 'Тебя трудно задеть',
+                            status: 'locked',
+                            cost: 3,
+                            effects: { dodge: 0.08, agility: 15 },
+                            requirements: { level_required: 15, level_current: 15, level_met: true, branch_level_required: 3, branch_level_met: false }
+                        },
+                        {
+                            level: 5,
+                            name: 'Теневой убийца',
+                            description: 'Ты — сама смерть во тьме',
+                            status: 'locked',
+                            cost: 5,
+                            effects: { crit: 0.12, crit_damage: 2.0, dodge: 0.1 },
+                            requirements: { level_required: 20, level_current: 15, level_met: false, branch_level_required: 4, branch_level_met: false }
+                        }
+                    ]
+                },
+                {
+                    id: 'divine_guardian',
+                    name: 'Божественный страж',
+                    emoji: '🛡️',
+                    description: 'Несокрушимая защита',
+                    max_level: 5,
+                    current_level: 1,
+                    is_unlocked: true,
+                    multiplier: 1.0,
+                    levels: [
+                        {
+                            level: 1,
+                            name: 'Стальная воля',
+                            description: 'Твоя решимость крепнет',
+                            status: 'learned',
+                            cost: 1,
+                            effects: { hp: 50, armor: 5 },
+                            requirements: { level_required: 1, level_current: 15, level_met: true, branch_level_required: 0, branch_level_met: true }
+                        },
+                        {
+                            level: 2,
+                            name: 'Живая крепость',
+                            description: 'Ты становишься стеной для врагов',
+                            status: 'available',
+                            cost: 2,
+                            effects: { hp: 100, armor: 10, block: 0.05 },
+                            requirements: { level_required: 5, level_current: 15, level_met: true, branch_level_required: 1, branch_level_met: true }
+                        },
+                        {
+                            level: 3,
+                            name: 'Светлый щит',
+                            description: 'Твоя защита распространяется на союзников',
+                            status: 'locked',
+                            cost: 2,
+                            effects: { armor: 15, party_armor: 5 },
+                            requirements: { level_required: 10, level_current: 15, level_met: true, branch_level_required: 2, branch_level_met: false }
+                        },
+                        {
+                            level: 4,
+                            name: 'Неуязвимость',
+                            description: 'Ты игнорируешь критические удары',
+                            status: 'locked',
+                            cost: 3,
+                            effects: { hp: 200, armor: 20, crit_resist: 0.5 },
+                            requirements: { level_required: 15, level_current: 15, level_met: true, branch_level_required: 3, branch_level_met: false }
+                        },
+                        {
+                            level: 5,
+                            name: 'Божественный страж',
+                            description: 'Ты — живая легенда защиты',
+                            status: 'locked',
+                            cost: 5,
+                            effects: { hp: 300, armor: 30, block: 0.15 },
+                            requirements: { level_required: 20, level_current: 15, level_met: false, branch_level_required: 4, branch_level_met: false }
+                        }
+                    ]
+                }
+            ]
+        };
+
+        let currentData = null;
+        let currentBranch = null;
+        let selectedSkill = null;
+
+        function init() {
+            currentData = DEMO_DATA;
+            currentBranch = currentData.branches[0];
+            renderApp();
+        }
+
+        function renderApp() {
+            const { diploma_type, prestige_points, branches } = currentData;
+            
+            let html = `
+                <div class="header">
+                    <div class="diploma-badge ${diploma_type === 'red' ? 'diploma-red' : 'diploma-blue'}">
+                        ${diploma_type === 'red' ? '🔴 КРАСНЫЙ ДИПЛОМ' : '🔵 СИНИЙ ДИПЛОМ'}
+                    </div>
+                    <div class="points">${prestige_points}</div>
+                    <div class="points-label">очков прокачки</div>
+                </div>
+
+                <div class="tabs">
+                    ${branches.map(branch => `
+                        <div class="tab ${currentBranch?.id === branch.id ? 'active' : ''}" onclick="selectBranch('${branch.id}')">
+                            ${branch.emoji} ${branch.name}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            if (currentBranch) {
+                html += renderSkillTree(currentBranch);
+            }
+
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function renderSkillTree(branch) {
+            const levels = branch.levels;
+            const progressPercent = (branch.current_level / branch.max_level) * 100;
+            
+            let statusMessage = '';
+            if (!branch.is_unlocked) {
+                statusMessage = '🔒 Ветка заблокирована. Получи диплом в Академии!';
+            } else if (branch.current_level >= branch.max_level) {
+                statusMessage = '🏆 Ветка полностью изучена!';
+            } else {
+                const nextLevel = branch.current_level + 1;
+                const nextSkill = levels.find(l => l.level === nextLevel);
+                statusMessage = nextSkill ? `📖 Нажми на "${nextSkill.name}" чтобы изучить` : '';
+            }
+            
+            let treeHtml = `
+                <div class="tree-container">
+                    <div class="skill-tree">
+            `;
+            
+            levels.forEach((level, idx) => {
+                let status = level.status;
+                if (level.level <= branch.current_level) {
+                    status = 'learned';
+                } else if (level.level === branch.current_level + 1 && branch.is_unlocked) {
+                    status = 'available';
+                } else {
+                    status = 'locked';
+                }
+                
+                treeHtml += `
+                    <div class="skill-row">
+                        <div class="skill-node ${status}" onclick="openSkillModal('${branch.id}', ${level.level})">
+                            <div class="skill-emoji">${getStatusEmoji(status)}</div>
+                            <div class="skill-name">${escapeHtml(level.name)}</div>
+                            <div class="skill-desc">${escapeHtml(level.description.substring(0, 40))}${level.description.length > 40 ? '...' : ''}</div>
+                            ${level.effects ? `<div class="skill-desc" style="color: #ffd700;">${formatEffectsShort(level.effects)}</div>` : ''}
+                            ${status !== 'learned' ? `<div class="skill-cost">⚡ ${level.cost} очков</div>` : ''}
+                        </div>
+                    </div>
+                `;
+                if (idx < levels.length - 1) {
+                    treeHtml += `<div class="connector">▼</div>`;
+                }
+            });
+            
+            treeHtml += `
+                    </div>
+                </div>
+                
+                <div class="branch-info">
+                    <div class="branch-status">
+                        <span>${branch.emoji} ${escapeHtml(branch.name)}</span>
+                        <span>${branch.current_level}/${branch.max_level}</span>
+                    </div>
+                    <div class="branch-progress">
+                        <div class="branch-progress-fill" style="width: ${progressPercent}%"></div>
+                    </div>
+                    <div class="branch-message">${statusMessage}</div>
+                </div>
+            `;
+            
+            return treeHtml;
+        }
+
+        function getStatusEmoji(status) {
+            if (status === 'learned') return '⭐';
+            if (status === 'available') return '🔓';
+            return '🔒';
+        }
+
+        function formatEffectsShort(effects) {
+            const parts = [];
+            for (const [stat, value] of Object.entries(effects)) {
+                if (stat === 'crit' || stat === 'dodge' || stat === 'block') {
+                    parts.push(`+${Math.round(value * 100)}%`);
+                } else {
+                    parts.push(`+${value}`);
+                }
+            }
+            return parts.slice(0, 2).join(' | ');
+        }
+
+        function formatStatValue(stat, value) {
+            if (stat === 'crit' || stat === 'dodge' || stat === 'block') {
+                return `${Math.round(value * 100)}%`;
+            }
+            return `+${value}`;
+        }
+
+        function getStatIcon(stat) {
+            const icons = { power: '⚔️', hp: '❤️', mana: '💙', armor: '🛡️', crit: '💥', dodge: '💨', block: '🛡️', spell_damage: '✨', mana_regen: '💙', hp_regen: '❤️' };
+            return icons[stat] || '📊';
+        }
+
+        function getStatName(stat) {
+            const names = { power: 'Сила', hp: 'Здоровье', mana: 'Мана', armor: 'Броня', crit: 'Крит шанс', dodge: 'Уворот', block: 'Блок', spell_damage: 'Урон заклинаний', mana_regen: 'Реген маны', hp_regen: 'Реген HP' };
+            return names[stat] || stat;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        function openSkillModal(branchId, level) {
+            const branch = currentData.branches.find(b => b.id === branchId);
+            if (!branch) return;
+            
+            let skill = branch.levels.find(l => l.level === level);
+            if (!skill) return;
+            
+            let status = skill.status;
+            if (skill.level <= branch.current_level) status = 'learned';
+            else if (skill.level === branch.current_level + 1 && branch.is_unlocked) status = 'available';
+            else status = 'locked';
+            
+            const canLearn = status === 'available' && currentData.prestige_points >= skill.cost;
+            
+            const modalHtml = `
+                <div class="modal-emoji">${getStatusEmoji(status)}</div>
+                <div class="modal-title">${escapeHtml(skill.name)}</div>
+                <div class="modal-desc">${escapeHtml(skill.description)}</div>
+                
+                <div class="requirement-item">
+                    <span class="requirement-label">📊 Уровень героя</span>
+                    <span class="requirement-value ${skill.requirements.level_met ? 'met' : 'not-met'}">
+                        ${skill.requirements.level_current}/${skill.requirements.level_required}
+                    </span>
+                </div>
+                
+                <div class="requirement-item">
+                    <span class="requirement-label">🎓 Уровень ветки</span>
+                    <span class="requirement-value ${skill.requirements.branch_level_met ? 'met' : 'not-met'}">
+                        ${branch.current_level}/${skill.requirements.branch_level_required}
+                    </span>
+                </div>
+                
+                <div class="requirement-item">
+                    <span class="requirement-label">✨ Требуемые очки</span>
+                    <span class="requirement-value ${currentData.prestige_points >= skill.cost ? 'met' : 'not-met'}">
+                        ${currentData.prestige_points}/${skill.cost}
+                    </span>
+                </div>
+                
+                ${Object.keys(skill.effects).length > 0 ? `
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(210,180,140,0.2);">
+                    <div style="font-size: 12px; opacity: 0.7; margin-bottom: 8px;">📜 НАГРАДА ЗА ИЗУЧЕНИЕ</div>
+                    ${Object.entries(skill.effects).map(([stat, value]) => `
+                        <div class="requirement-item">
+                            <span class="requirement-label">${getStatIcon(stat)} ${getStatName(stat)}</span>
+                            <span class="requirement-value met">${formatStatValue(stat, value)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
+                
+                <div class="modal-buttons">
+                    ${canLearn ? `<button class="btn btn-primary" onclick="learnSkill()">Изучить (${skill.cost})</button>` : 
+                      status === 'learned' ? `<button class="btn btn-primary disabled" disabled>✅ Изучено</button>` :
+                      `<button class="btn btn-primary disabled" disabled>🔒 Недоступно</button>`}
+                    <button class="btn btn-secondary" onclick="closeModal()">Закрыть</button>
+                </div>
+            `;
+            
+            selectedSkill = { branchId, level, skill, branch };
+            document.getElementById('modalInner').innerHTML = modalHtml;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            selectedSkill = null;
+        }
+
+        function selectBranch(branchId) {
+            const branch = currentData.branches.find(b => b.id === branchId);
+            if (branch) {
+                currentBranch = branch;
+                renderApp();
+            }
+        }
+
+        function learnSkill() {
+            if (!selectedSkill) return;
+            
+            const { branch, skill } = selectedSkill;
+            
+            if (currentData.prestige_points < skill.cost) {
+                tg.showPopup({
+                    title: '❌ Ошибка',
+                    message: `Нужно ${skill.cost} очков прокачки!`,
+                    buttons: [{type: 'ok'}]
+                });
+                return;
+            }
+            
+            if (!skill.requirements.level_met) {
+                tg.showPopup({
+                    title: '❌ Ошибка',
+                    message: `Нужен ${skill.requirements.level_required} уровень героя!`,
+                    buttons: [{type: 'ok'}]
+                });
+                return;
+            }
+            
+            currentData.prestige_points -= skill.cost;
+            branch.current_level = skill.level;
+            
+            renderApp();
+            closeModal();
+            
+            tg.showPopup({
+                title: '✨ Успех',
+                message: `${skill.name} изучен!`,
+                buttons: [{type: 'ok'}]
+            });
+            
+            // Отправляем данные в бот (когда будет подключен)
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                tg.sendData(JSON.stringify({
+                    action: 'upgrade',
+                    branch_id: branch.id,
+                    level: skill.level
+                }));
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

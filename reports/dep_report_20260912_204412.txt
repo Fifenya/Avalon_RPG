@@ -1,0 +1,91 @@
+======================================================================
+ОТЧЁТ О НЕСОВМЕСТИМОСТИ ЗАВИСИМОСТЕЙ
+Дата: 2026-09-12T20:44:12.434011
+Python: 3.14.6 (main, Jul  5 2026, 10:35:55) [Clang 21.0.0 (https://android.googlesource.com/toolchain/llvm-project 5e96669f0
+Платформа: android
+======================================================================
+
+--- Выполненные действия ---
+✔️ python-telegram-bot 22.8 — OK
+📦 Пакет aiohttp не найден — скачиваю...
+💽 Выполняю: /data/data/com.termux/files/usr/bin/python -m pip install aiohttp>=3.8.0
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp/
+ERROR: Could not find a version that satisfies the requirement aiohttp>=3.8.0 (from versions: none)
+ERROR: No matching distribution found for aiohttp>=3.8.0
+📦 Пакет aiohttp-socks не найден — скачиваю...
+💽 Выполняю: /data/data/com.termux/files/usr/bin/python -m pip install aiohttp-socks>=0.7.0
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp-socks/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp-socks/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp-socks/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp-socks/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/aiohttp-socks/
+ERROR: Could not find a version that satisfies the requirement aiohttp-socks>=0.7.0 (from versions: none)
+ERROR: No matching distribution found for aiohttp-socks>=0.7.0
+📦 Пакет Pillow не найден — скачиваю...
+💽 Выполняю: /data/data/com.termux/files/usr/bin/python -m pip install Pillow>=9.0.0
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/pillow/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/pillow/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/pillow/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/pillow/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/pillow/
+ERROR: Could not find a version that satisfies the requirement Pillow>=9.0.0 (from versions: none)
+ERROR: No matching distribution found for Pillow>=9.0.0
+📦 Пакет requests не найден — скачиваю...
+💽 Выполняю: /data/data/com.termux/files/usr/bin/python -m pip install requests>=2.28.0
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/requests/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/requests/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/requests/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/requests/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='pypi.org', port=443): Read timed out. (read timeout=15)")': /simple/requests/
+ERROR: Could not find a version that satisfies the requirement requests>=2.28.0 (from versions: none)
+ERROR: No matching distribution found for requests>=2.28.0
+✔️ python-dotenv 1.2.3 — OK
+⚠️ python-dotenv 1.2.3 НОВЕЕ проверенной 1.1.1 — возможна несовместимость!
+ОШИБКА УСТАНОВКИ: aiohttp>=3.8.0
+ОШИБКА УСТАНОВКИ: aiohttp-socks>=0.7.0
+ОШИБКА УСТАНОВКИ: Pillow>=9.0.0
+ОШИБКА УСТАНОВКИ: requests>=2.28.0
+⚠️ python-dotenv 1.2.3 НОВЕЕ проверенной 1.1.1 — возможна несовместимость!
+
+--- Установленные версии ---
+python-telegram-bot: 22.8
+aiohttp: None
+aiohttp-socks: None
+Pillow: None
+requests: None
+python-dotenv: 1.2.3
+
+--- Ошибки проверки совместимости ---
+### aiohttp ###
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import aiohttp
+ModuleNotFoundError: No module named 'aiohttp'
+
+### aiohttp-socks ###
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from aiohttp_socks import ProxyConnector
+ModuleNotFoundError: No module named 'aiohttp_socks'
+
+### Pillow ###
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from PIL import Image
+ModuleNotFoundError: No module named 'PIL'
+
+### requests ###
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+--- Как исправить ---
+pip install "aiohttp>=3.8.0,<=3.12.15"   # проверенная версия: pip install aiohttp==3.12.15
+pip install "aiohttp-socks>=0.7.0,<=0.10.1"   # проверенная версия: pip install aiohttp-socks==0.10.1
+pip install "Pillow>=9.0.0,<=11.3.0"   # проверенная версия: pip install Pillow==11.3.0
+pip install "requests>=2.28.0,<=2.32.5"   # проверенная версия: pip install requests==2.32.5

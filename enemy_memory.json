@@ -1,0 +1,89 @@
+{
+  "👑_Король_пауков_1705074964": {
+    "total_battles": 1,
+    "player_wins": 0,
+    "enemy_wins": 1,
+    "player_behavior": "aggressive",
+    "player_patterns": {
+      "favorite_attack": {
+        "грудь": 1
+      },
+      "attack_timing": [],
+      "defense_frequency": 0.0,
+      "heal_frequency": 0.0,
+      "flee_frequency": 0.0,
+      "crit_attempts": 0,
+      "avg_damage_per_turn": 66.0,
+      "hp_threshold_for_heal": 100,
+      "preferred_body_parts": {},
+      "combo_patterns": [
+        "attack_attack_miss",
+        "attack_miss_attack_miss"
+      ]
+    },
+    "player_stats": {
+      "min_hp": 18,
+      "max_hp": 100,
+      "avg_hp": 61.0,
+      "min_power": 50,
+      "max_power": 70,
+      "avg_power": 70.0,
+      "min_armor": 0,
+      "max_armor": 0,
+      "avg_armor": 0.0,
+      "crit_chance": 0.1,
+      "dodge_chance": 0.05
+    },
+    "enemy_adaptations": {
+      "preferred_defense": null,
+      "vulnerable_phases": [],
+      "effective_strategies": {
+        "attack": 35,
+        "heavy_attack": 139
+      },
+      "last_update": "2026-04-25T02:23:16.911628"
+    },
+    "battle_history": [
+      {
+        "timestamp": "2026-04-25T02:23:29.336159",
+        "player_won": false,
+        "log_summary": [
+          {
+            "turn": 0,
+            "actor": "enemy",
+            "action_type": "attack",
+            "description": "замечает твою открытую защиту и атакует сильнее! 💥"
+          },
+          {
+            "turn": 1,
+            "actor": "player",
+            "action_type": "attack_miss",
+            "body_part": "голова",
+            "player_hp": 65,
+            "player_power": 70
+          },
+          {
+            "turn": 1,
+            "actor": "enemy",
+            "action_type": "heavy_attack",
+            "description": "наносит мощный удар! 💥"
+          },
+          {
+            "turn": 2,
+            "actor": "player",
+            "action_type": "attack_miss",
+            "body_part": "ноги",
+            "player_hp": 18,
+            "player_power": 70
+          },
+          {
+            "turn": 2,
+            "actor": "enemy",
+            "action_type": "heavy_attack",
+            "description": "чувствует твою слабость и пытается добить! 💀"
+          }
+        ]
+      }
+    ]
+  }
+}

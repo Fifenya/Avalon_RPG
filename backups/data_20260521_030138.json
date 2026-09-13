@@ -1,0 +1,287 @@
+{
+  "_clans": {},
+  "1705074964": {
+    "name": "RimuruAnon",
+    "race": "🐱 Кошколюд",
+    "class": "mage",
+    "gender": "♀️ Женский",
+    "money": 0,
+    "power": 70,
+    "hp": 65,
+    "max_hp": 100,
+    "mana": 50,
+    "max_mana": 50,
+    "mana_regen": 1,
+    "level": 1,
+    "exp": 90,
+    "location": "city",
+    "dungeon_floor": 1,
+    "dungeon_progress": 3,
+    "last_mana_update": 1779310867.2739284,
+    "tg_username": "Rimuru_anon",
+    "inventory": {
+      "items": [
+        {
+          "id": "mana_potion_small",
+          "name": "💙 Малое зелье маны",
+          "type": "potion",
+          "rarity": "common",
+          "stats": {
+            "mana": 30
+          }
+        },
+        {
+          "id": "❤_среднее_зелье_здоровья",
+          "name": "❤️ Среднее зелье здоровья",
+          "type": "potion",
+          "rarity": "common",
+          "stats": {
+            "hp": 75
+          }
+        }
+      ],
+      "equipped": {}
+    },
+    "resources": {
+      "wood": 3,
+      "herb": 2,
+      "berry": 1,
+      "mushroom": 1
+    },
+    "kills": 7,
+    "wins": 0,
+    "losses": 0,
+    "battle_logging_enabled": false,
+    "achievements": {},
+    "death_time": null,
+    "destiny_quest": null,
+    "destiny_effect": null,
+    "crit_chance": 0.3,
+    "dodge_chance": 0.05,
+    "block_chance": 0.05,
+    "agility": 10,
+    "rank": "G",
+    "works_done": 1,
+    "crafts_done": 0,
+    "ale_stack": 0,
+    "ale_drinks_today": 0,
+    "drunk_status": 0,
+    "last_drink_time": null,
+    "temp_buffs": {},
+    "luck": 0.3,
+    "hp_regen": 5,
+    "ale_buffs_expire": null,
+    "alcoholic_until": null,
+    "total_drinks": 0,
+    "drunk_level": 0,
+    "drunk_multiplier": 1.0,
+    "total_crits": 0,
+    "max_damage": 0,
+    "max_crit": 0,
+    "total_blocked": 0,
+    "total_dodges": 0,
+    "total_mana_regen": 0,
+    "total_hp_regen": 0,
+    "total_earned": 0,
+    "total_spent": 0
+  },
+  "6904901461": {
+    "name": "Deutsch",
+    "tg_first_name": "Deutsch",
+    "race": "🦊 Лисолюд",
+    "class": "mage",
+    "gender": "♂️ Мужской",
+    "money": 6188,
+    "business": 0,
+    "houses": 0,
+    "power": 100,
+    "reputation": 50,
+    "wins": 0,
+    "losses": 0,
+    "level": 5,
+    "exp": 76,
+    "hp": 180,
+    "max_hp": 180,
+    "last_work": "2026-03-05T19:23:26.500737",
+    "banned": false,
+    "mana": 50,
+    "max_mana": 50,
+    "location": "city",
+    "kills": 47,
+    "inventory": {
+      "items": [
+        {
+          "id": "torn_robe",
+          "name": "👘 Рваный балахон",
+          "type": "armor",
+          "rarity": "common",
+          "stats": {
+            "armor": 1,
+            "mana": 3
+          }
+        },
+        {
+          "id": "rusty_sword",
+          "name": "🗡️ Ржавый меч",
+          "type": "weapon",
+          "rarity": "common",
+          "stats": {
+            "power": 3
+          }
+        },
+        {
+          "id": "weak_staff_spark",
+          "name": "🪄 Слабый посох (искра)",
+          "type": "weapon",
+          "rarity": "uncommon",
+          "stats": {
+            "power": 6,
+            "spell_damage": 3
+          }
+        },
+        {
+          "id": "staff_frost",
+          "name": "❄️ Посох мороза",
+          "type": "weapon",
+          "rarity": "rare",
+          "stats": {
+            "power": 8,
+            "spell_damage": 10,
+            "mana_cost": 5,
+            "freeze_chance": 0.05
+          }
+        },
+        {
+          "id": "weak_staff_flame",
+          "name": "🔥 Слабый посох пламени",
+          "type": "weapon",
+          "rarity": "uncommon",
+          "stats": {
+            "power": 9,
+            "spell_damage": 7,
+            "mana_cost": 4,
+            "burn_damage": 2
+          }
+        }
+      ],
+      "equipped": {
+        "weapon": {
+          "id": "staff_flame",
+          "name": "🔥 Посох пламени",
+          "type": "weapon",
+          "rarity": "rare",
+          "stats": {
+            "power": 12,
+            "spell_damage": 7,
+            "mana_cost": 5,
+            "burn_damage": 3
+          }
+        },
+        "armor": {
+          "id": "torn_robe",
+          "name": "👘 Рваный балахон",
+          "type": "armor",
+          "rarity": "common",
+          "stats": {
+            "armor": 1,
+            "mana": 3
+          }
+        }
+      }
+    },
+    "resources": {
+      "leather": 5,
+      "tanned_leather": 3,
+      "iron_ore_shard": 1,
+      "rusty_shard": 2,
+      "rusty_ore_shard": 2,
+      "cloth": 2,
+      "magic_threads": 2,
+      "small_magic_stone": 3,
+      "fire_magic_tome": 3
+    },
+    "achievements": {
+      "killer_10": {
+        "got": "2026-03-13T21:20:48.019305",
+        "name": "🥉 Новичок"
+      },
+      "rich_10000": {
+        "got": "2026-03-23T08:50:13.180944",
+        "name": "💰 Богач"
+      }
+    },
+    "tg_username": "Deutsch_Guy",
+    "mood": 50
+  },
+  "7856078837": {
+    "name": "Мухомор",
+    "race": "👹 Демон",
+    "class": "warrior",
+    "gender": "♂️ Мужской",
+    "money": 894,
+    "power": 50,
+    "hp": 100,
+    "max_hp": 100,
+    "mana": 50,
+    "max_mana": 50,
+    "mana_regen": 1,
+    "level": 1,
+    "exp": 41,
+    "location": "city",
+    "dungeon_floor": 1,
+    "dungeon_progress": 0,
+    "last_mana_update": 1779310867.2871494,
+    "tg_username": "Muhammed_5678",
+    "inventory": {
+      "items": [
+        {
+          "id": "iron_axe",
+          "name": "🪓 Железный топор",
+          "type": "weapon",
+          "rarity": "common",
+          "stats": {
+            "power": 10
+          }
+        }
+      ],
+      "equipped": {}
+    },
+    "resources": {},
+    "kills": 3,
+    "wins": 0,
+    "losses": 0,
+    "battle_logging_enabled": false,
+    "achievements": {},
+    "death_time": null,
+    "destiny_quest": null,
+    "destiny_effect": null,
+    "crit_chance": 0.1,
+    "dodge_chance": 0.05,
+    "block_chance": 0.05,
+    "agility": 10,
+    "rank": "G",
+    "works_done": 2,
+    "crafts_done": 0,
+    "ale_stack": 0,
+    "ale_drinks_today": 0,
+    "drunk_status": 0,
+    "last_drink_time": null,
+    "temp_buffs": {},
+    "luck": 0.0,
+    "hp_regen": 5,
+    "ale_buffs_expire": null,
+    "alcoholic_until": null,
+    "total_drinks": 0,
+    "drunk_level": 0,
+    "drunk_multiplier": 1.0,
+    "total_crits": 0,
+    "max_damage": 0,
+    "max_crit": 0,
+    "total_blocked": 0,
+    "total_dodges": 0,
+    "total_mana_regen": 0,
+    "total_hp_regen": 0,
+    "total_earned": 0,
+    "total_spent": 0
+  }
+}

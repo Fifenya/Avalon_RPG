@@ -1,0 +1,70 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Секреты и конфиги (НИКОГДА не коммитить)
+.env
+.env.local
+config_secrets.py
+
+# Бэкапы (создавались скриптами)
+*.bak
+*.bak_*
+
+# Данные и кэш
+avalon_data.json
+theme_cache.json
+whitelist.json
+whitelist.db
+allowed_users.json
+allowed_users.db
+*.log
+logs/
+battle_logs/
+
+# Ollama модели (слишком большие для GitHub)
+.ollama/
+models/
+*.gguf
+
+# Музыка (большие mp3 — используй git-lfs или отдельный архив)
+# music/themes/*.mp3
+
+# Acode / редакторы
+.acode/
+*.swp
+.vscode/
+.idea/
+
+# Временные файлы
+.restart_in_progress
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Скомпилированные
+*.pyc
+
+# Отчёты (слишком много)
+reports/*.md
+!reports/README.md
