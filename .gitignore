@@ -68,3 +68,6 @@ Thumbs.db
 # Отчёты (слишком много)
 reports/*.md
 !reports/README.md
+# Приватные данные
+backups/
+data/
