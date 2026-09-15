@@ -71,3 +71,13 @@ reports/*.md
 # Приватные данные
 backups/
 data/
+
+# Приватные данные (не коммитить!)
+backups/
+data/
+proxies.json
+enemy_memory.json
+global_enemy_memory.json
+*.bak*
+theme_cache.json
+avalon_data.json
