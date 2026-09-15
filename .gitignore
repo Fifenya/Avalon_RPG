@@ -81,3 +81,7 @@ global_enemy_memory.json
 *.bak*
 theme_cache.json
 avalon_data.json
+proxies.json
+enemy_memory.json
+global_enemy_memory.json
+tactics_*.json
